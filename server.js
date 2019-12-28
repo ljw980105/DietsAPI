@@ -12,7 +12,12 @@ mongoose.connect('mongodb://localhost/dietdb');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
 
+app.get('/', function (req, res) {
+    console.log("directory name:" + __dirname);
+    res.send("Diets API");
+});
 
 var routes = require('./api/routes/DietsAPIRoutes'); //importing route
 routes(app); //register the route
