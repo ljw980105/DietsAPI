@@ -10,7 +10,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/dietdb');
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
@@ -26,4 +26,4 @@ routes(app); //register the route
 app.listen(port);
 
 
-console.log('todo list RESTful API server started on: ' + port);
+console.log('Diets RESTful API server started on: ' + port);
