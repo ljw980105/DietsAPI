@@ -2,7 +2,7 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    Task = require('./api/models/DietsAPIModel'), //created model loading here
+    Diet = require('./api/models/DietsAPIModel'), //created model loading here
     bodyParser = require('body-parser');
 
 // mongoose instance connection url connection
@@ -26,4 +26,4 @@ routes(app); //register the route
 app.listen(port);
 
 
-console.log('Diets RESTful API server started on: ' + port);
+console.log('Diets RESTful API server started on port: ' + port);

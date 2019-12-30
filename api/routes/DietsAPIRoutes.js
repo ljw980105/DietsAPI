@@ -11,4 +11,7 @@ module.exports = function(app) {
 
     app.route('/test')
         .get(dietsController.test);
+
+    app.route('/delete-all')
+        .get(dietsController.delete_all);
 };

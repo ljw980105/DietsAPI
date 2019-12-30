@@ -10,7 +10,7 @@ exports.upload_diets = function(req, res) {
     new_diet.save(function (err, diet) {
         if (err)
             res.send(err);
-        res.json(diet);
+        res.send(JSON.stringify({"message": "success"}));
     });
 };
 
@@ -25,5 +25,14 @@ exports.get_diets = function(req, res) {
         if (err)
             res.send(err);
         res.json(diet);
+    });
+};
+
+exports.delete_all = function(req, res) {
+    console.log("deleting all diets");
+    Diet.remove({}, function(err, diet) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Successfully deleted all diets' });
     });
 };
