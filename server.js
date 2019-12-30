@@ -12,7 +12,8 @@ mongoose.connect('mongodb://localhost/dietdb');
 
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
 app.use(bodyParser.json({limit: '50mb'}));
-app.use(express.static(__dirname + '/public'));
+// serve static files in the /files directory
+app.use("/files", express.static(__dirname + '/files'));
 
 app.get('/', function (req, res) {
     console.log("directory name:" + __dirname);

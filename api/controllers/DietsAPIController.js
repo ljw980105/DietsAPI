@@ -1,11 +1,17 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Diet = mongoose.model('Diets');
+    Diet = mongoose.model('Diets'),
+    fs = require('fs');
 
 exports.upload_diets = function(req, res) {
     console.log("uploading diets");
     var new_diet = new Diet(req.body);
+
+    let file = new Buffer(req.body.image_data, 'base64');
+    fs.writeFile("./files/" + req.body.name + ".png", file, function (error) {
+        if (error) res.send(error);
+    });
 
     new_diet.save(function (err, diet) {
         if (err)
