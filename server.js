@@ -3,7 +3,20 @@ var express = require('express'),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     Diet = require('./api/models/DietsAPIModel'), //created model loading here
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    fs = require('fs');
+
+const https = require('https');
+
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/chain.pem', 'utf8');
+
+const credentials = {
+    key: privateKey,
+    cert: certificate,
+    ca: ca
+};
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
@@ -23,8 +36,8 @@ app.get('/', function (req, res) {
 var routes = require('./api/routes/DietsAPIRoutes'); //importing route
 routes(app); //register the route
 
-
-app.listen(port);
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(port);
 
 
 console.log('Diets RESTful API server started on port: ' + port);
